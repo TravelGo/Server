@@ -5,6 +5,7 @@ module.exports = {
         loginSuccess : "AccountLoginSuccess",
         loginFail : "AccountLoginFail",
         alreadyUsername : "AlreadyUsername",
+        Logout : "Logout",
     },
     invalid : {
         username : "InvalidUsername",
