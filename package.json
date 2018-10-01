@@ -1,7 +1,7 @@
 {
   "name": "Server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Reference : https://poiemaweb.com/mongoose",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +13,16 @@
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "mongoose": "^5.3.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TravelGo/Server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TravelGo/Server/issues"
+  },
+  "homepage": "https://github.com/TravelGo/Server#readme"
 }

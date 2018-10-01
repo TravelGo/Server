@@ -53,4 +53,24 @@ router.post('/create', (req, res) => {
     })
 });
 
+router.post('/login', function(req, res) {
+    var username = req.body.username.trim()
+    var password = req.body.password.trim()
+    password = Util.passwordHash(password)
+    Accounts.select({
+        username: username,
+        password: password
+    }).then(function(account) {
+        if(account === null) {
+            res.send(returnCode['accounts']['loginFail'])
+            return;
+        }
+        req.session.username = username;
+        res.send(returnCode['accounts']['loginSuccess'])
+    }).catch(function(err) {
+        console.log(err);
+        res.status(500).send(returnCode['unknown']['error']);
+    })
+});
+
 module.exports = router;

@@ -2,6 +2,8 @@ module.exports = {
     accounts : {
         createSuccess : "AccountCreateSuccess",
         createFail : "AccountCreateFail",
+        loginSuccess : "AccountLoginSuccess",
+        loginFail : "AccountLoginFail",
         alreadyUsername : "AlreadyUsername",
     },
     invalid : {

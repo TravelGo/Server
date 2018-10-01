@@ -1,12 +1,12 @@
-# TravelGO Server Env. Setting
+# TravelGO Server Env & Setting
 
 Reference : https://poiemaweb.com/mongoose
 
 ## Set-up Node-JS Library
-Install Express, Body-Parser, Dotenv and Mongoose with NPM
+Install Express, Body-Parser, Dotenv, Express-Session and Mongoose with NPM
 ```
 npm init --yes
-npm install express body-parser dotenv mongoose
+npm install express body-parser dotenv mongoose express-session
 ```
 ****
 
@@ -24,3 +24,8 @@ npm install express body-parser dotenv mongoose
 ├── util.js                 // 각종 함수 지원
 └── validCheck.js           // Regex를 통한 data validation 
 ```
+
+## SESSION
+key|value
+---|---
+username|username of user
