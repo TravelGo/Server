@@ -5,7 +5,7 @@ const ValidCheck = require("../validCheck");
 const Util = require("../util");
 
 router.get('/', (req, res) => {
-  res.send("<h1>HiHi~ TravelGO API</h1>")
+  res.send("<h1>HiHi~ TravelGO API asdsadsad</h1>")
 });
 
 module.exports = router;

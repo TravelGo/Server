@@ -9,8 +9,6 @@ const exec = require('child_process').exec;
 const app = express();
 const port = process.env.PORT;
 
-app.set('view engine', 'pug');
-
 app.use(session({
     secret: '#!#!#SESSIONID#!#!#',
     resave: false,
