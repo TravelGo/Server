@@ -27,8 +27,9 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true})
     .then(() => console.log('Successfully connected to mongodb'))
     .catch(e => console.error(e));
+
 app.use('/git', (req, res) => {
-  exec("/bin/sh update.sh", (stderr, stdout, stdin)=>{
+  exec("./update.sh", (stderr, stdout, stdin)=>{
     res.send(stdout);
   });
 });
