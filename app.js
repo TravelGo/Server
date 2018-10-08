@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const exec = require('child_process').exec;
 
 const app = express();
 const port = process.env.PORT;
@@ -26,7 +27,11 @@ mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true})
     .then(() => console.log('Successfully connected to mongodb'))
     .catch(e => console.error(e));
-
+app.use('/git', (req, res) => {
+  exec("git pull", (stderr, stdout, stdin)=>{
+    res.send(stdout);
+  });
+});
 app.use('/', require('./routes/test'));
 app.use('/accounts', require('./routes/accounts'));
 app.use('/travelstop', require('./routes/travelstop'));
