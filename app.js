@@ -13,7 +13,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
    }));
-   
+
 app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,8 +25,8 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true})
     .then(() => console.log('Successfully connected to mongodb'))
     .catch(e => console.error(e));
 
-
+app.use('/', require('./routes/test'));
 app.use('/accounts', require('./routes/accounts'));
+app.use('/travelstop', require('./routes/travelstop'));
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
-
