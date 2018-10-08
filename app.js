@@ -8,6 +8,8 @@ const session = require('express-session');
 const app = express();
 const port = process.env.PORT;
 
+app.set('view engine', 'pug');
+
 app.use(session({
     secret: '#!#!#SESSIONID#!#!#',
     resave: false,

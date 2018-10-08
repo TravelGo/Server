@@ -36,5 +36,8 @@ AccountsSchema.statics.select = function(param) {
     return this.findOne(param);
 }
 
-module.exports = mongoose.model('accounts', AccountsSchema);
+AccountsSchema.statics.count = function() {
+  return this.find({}).count();
+}
 
+module.exports = mongoose.model('accounts', AccountsSchema);
