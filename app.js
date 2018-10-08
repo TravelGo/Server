@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true})
     .then(() => console.log('Successfully connected to mongodb'))
     .catch(e => console.error(e));
 app.use('/git', (req, res) => {
-  exec("git pull", (stderr, stdout, stdin)=>{
+  exec("/bin/sh update.sh", (stderr, stdout, stdin)=>{
     res.send(stdout);
   });
 });
