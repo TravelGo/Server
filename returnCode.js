@@ -12,7 +12,11 @@ module.exports = {
         phone : "InvalidPhone",
         value : "NoValue",
     },
+    travelstop : {
+      addSuccess : "TravelstopAddSuccess"
+    },
     unknown : {
         error : "UnknownError"
-    }
+    },
+    notAdmin : "NotAdmin"
 }

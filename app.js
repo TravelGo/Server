@@ -34,5 +34,6 @@ app.use('/git', (req, res) => {
 app.use('/', require('./routes/test'));
 app.use('/accounts', require('./routes/accounts'));
 app.use('/travelstop', require('./routes/travelstop'));
+app.use('/board', require('./routes/board'));
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));

@@ -103,7 +103,8 @@ T-Stop 이름|name|
 #### Response ( Not JSON )
 CODE|MESSAGE
 ---|---
----|---
+TravelstopAddSuccess|트라벨스탑 추가 성공
+AddFail|트라벨스탑 추가 실패
 
 ### 2. 트라벨스탑 정보 : GET /travelstop/:key
 #### Request Params with JSON
