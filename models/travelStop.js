@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const TravelStop = new mongoose.Schema({
   lat : {
-      type: float,
+      type: Number,
       required: true,
   },
   lng : {
-      type: float,
+      type: Number,
       require: true
   },
   title : {
@@ -37,6 +37,10 @@ TravelStop.statics.create = function(title, description, lat, lng, image) {
 
 TravelStop.statics.select = function(param) {
     return this.findOne(param);
+}
+
+TravelStop.statics.selectAll = function(param) {
+  return this.find(param);
 }
 
 module.exports = mongoose.model('travelStop', TravelStop);

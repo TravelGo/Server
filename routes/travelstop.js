@@ -7,18 +7,18 @@ const Util = require("../util");
 
 router.post('/create', (req, res) => {
 
-    if(req.session.username !== "admin") {
-      res.send(returnCode.notAdmin)
-      return;
-    }
+    // if(req.session.username !== "admin") {
+    //   res.send(returnCode.notAdmin)
+    //   return;
+    // }
 
-    var lat = float(req.body.lat.trim());
-    var lng = float(req.body.lng.trim());
-    var title = req.body.title.trim();
-    var description = req.body.description.trim();
-    var image = req.body.image.trim();
+    var lat = parseFloat(req.body.lat);
+    var lng = parseFloat(req.body.lng);
+    var title = req.body.title;
+    var description = req.body.description;
+    var image = req.body.image;
 
-    Accounts.create(title, description, lat, lng, image)
+    travelStop.create(title, description, lat, lng, image)
     .then(function() {
         res.send(returnCode['travelstop']['addSuccess']);
     })
@@ -27,6 +27,29 @@ router.post('/create', (req, res) => {
         res.status(500).send(returnCode['unknown']['error'])
     })
 
+});
+
+router.get('/:lat/:lng', (req, res) => {
+    var lat = req.params.lat;
+    var lng = req.params.lng;
+
+    travelStop.selectAll({})
+    .then((code) => {
+        console.log(code)
+        var output = []
+        for(i=0;i<code.length;i++) {
+            output.push(
+                {
+                    "name": code[i]['title'],
+                    "location":{
+                        "longitude": code[i]['lng'],
+                        "latitude": code[i]['lat'],
+                    },
+                }
+            )
+        }
+        res.send(output)
+    })
 });
 
 

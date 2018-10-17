@@ -100,6 +100,10 @@ name|key|value
 T-Stop 이름|name|
 설명|descript|
 이미지|image|data protocol base64encoded
+##### 예시
+```
+{"lat": "37.611026", "lng": "126.996917", "description": "jangtaejin", "image": "010-2885-1111", "title": "kookmin University"}
+```
 #### Response ( Not JSON )
 CODE|MESSAGE
 ---|---
@@ -121,10 +125,32 @@ CODE|MESSAGE
 name|key|value
 ---|---|---
 ---|---|---
-#### Response ( Not JSON )
-CODE|MESSAGE
----|---****
----|---
+#### Response ( JSON Array, Example )
+```
+[
+    {
+      "name": "kookmin University",
+      "location":{
+        "longitude": 126.996917,
+        "latitude": 37.611026,
+      },
+    },
+    {
+      "name": "Cat Structure",
+      "location":{
+        "longitude": 126.997161,
+        "latitude":37.610304,
+      },
+    },
+    {
+      "name": "Nove",
+      "location":{
+        "longitude": 126.997075,
+        "latitude": 37.608417,
+      },
+    },
+]
+```
 
 ## 다. 방명록 관련
 
