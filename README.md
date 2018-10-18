@@ -114,13 +114,13 @@ AddFail|트라벨스탑 추가 실패
 #### Request Params with JSON
 name|key|value
 ---|---|---
----|---|---
-#### Response ( Not JSON )
-CODE|MESSAGE
----|---
----|---
+트라벨 스탑 번호|key|int
+##### 예시
+```
+{"lat": "37.611026", "lng": "126.996917", "description": "jangtaejin", "image": "010-2885-1111", "title": "kookmin University"}
+```
 
-### 3. 주변 트라벨스탑 리스트 : POST /travelstop/list
+### 3. 주변 트라벨스탑 리스트 : GET /travelstop/list
 #### Request Params with JSON
 name|key|value
 ---|---|---
@@ -158,31 +158,81 @@ name|key|value
 #### Request Params with JSON
 name|key|value
 ---|---|---
----|---|---
-#### Response ( Not JSON )
-CODE|MESSAGE
----|---
----|---
+TravelStop Key|key|int
+#### Response ( JSON )
+```
+[
+    {
+      "writer": "사용자이름",
+      "count": 숫자,
+      "like": 숫자,
+      "memo": "방명록 내용",
+      "timestamp": 타임스탬프,
+      "tier" : 랭크(색깔)
+    },
+    {
+      "writer": "사용자이름",
+      "count": 숫자,
+      "like": 숫자,
+      "memo": "방명록 내용",
+      "timestamp": 타임스탬프,
+      "tier" : 랭크(색깔)
+    },
+]
+```
 
 ### 2. 방명록 작성 : <METHOD> <PATH>
-#### Request Params with JSON
+#### 로그인 필수
+#### Request Params with JSON 
 name|key|value
 ---|---|---
----|---|---
+트라벨스탑Key|key|int
+latitude|lat|Number
+longitute|lng|Number
+memo|memo|String
 #### Response ( Not JSON )
 CODE|MESSAGE
 ---|---
----|---
+BoardWriteSuccess|성공
+BoardWriteFail|실패
 
 ### 3. 최신 방명록 : <METHOD> <PATH>
 #### Request Params with JSON
 name|key|value
 ---|---|---
----|---|---
-#### Response ( Not JSON )
-CODE|MESSAGE
----|---
----|---
+트라벨스탑Key|key|int
+latitude|lat|Number
+longitute|lng|Number
+#### Response ( JSON )
+```
+[
+    {
+      "writer": "사용자이름",
+      "count": 숫자,
+      "like": 숫자,
+      "memo": "방명록 내용",
+      "timestamp": 타임스탬프,
+      "tier" : 랭크(색깔)
+    },
+    {
+      "writer": "사용자이름",
+      "count": 숫자,
+      "like": 숫자,
+      "memo": "방명록 내용",
+      "timestamp": 타임스탬프,
+      "tier" : 랭크(색깔)
+    },
+    {
+      "writer": "사용자이름",
+      "count": 숫자,
+      "like": 숫자,
+      "memo": "방명록 내용",
+      "timestamp": 타임스탬프,
+      "tier" : 랭크(색깔)
+    },
+]
+```
+
 
 ## 라. 채팅 관련
 
@@ -190,18 +240,31 @@ CODE|MESSAGE
 #### Request Params with JSON
 name|key|value
 ---|---|---
----|---|---
-#### Response ( Not JSON )
-CODE|MESSAGE
----|---
----|---
+latitude|lat|Number
+longitute|lng|Number
+#### Response ( JSON )
+```
+[
+	{
+		"key": "포케스탑 고유키",
+		"count": 인원수,
+	}
+]
+```
 
 ### 2. 채팅방 정보
 #### Request Params with JSON
 name|key|value
 ---|---|---
----|---|---
-#### Response ( Not JSON )
-CODE|MESSAGE
----|---
----|---
+트라벨스탑Key|key|int
+latitude|lat|Number
+longitute|lng|Number
+#### Response ( JSON )
+```
+[
+	{
+		"key": "포케스탑 고유키",
+		"count": 인원수,
+	}
+]
+```
