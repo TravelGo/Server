@@ -4,17 +4,18 @@ const board = require('../models/board');
 const ValidCheck = require("../validCheck");
 const Util = require("../util");
 
-// id = T스탑 번호
+// no = T스탑 번호
 
-// T스탑에 글 쓰기
-router.post('/:id/write', (req, res) => {
+// T스탑에 방명록 쓰기
+router.post('/:idx/write', (req, res) => {
+  var travelStopIdx = req.params.idx;
   var username = req.body.username;
   var lat = parseFloat(req.body.lat);
   var lng = parseFloat(req.body.lng);
-  var content = req.body.content;
+  var memo = req.body.memo;
   var image = req.body.image;
 
-  board.create(username, lat, lng, content, image)
+  board.create(username, lat, lng, article)
     .then(function() {
         res.send(returnCode['board']['addSuccess']);
     })
@@ -24,18 +25,34 @@ router.post('/:id/write', (req, res) => {
     })
 });
 
-//T스탑 글 수정
-router.post('/:id/edit', (req, res) => {
-
+//작성한 방명록 수정
+router.post('/:idx/edit', (req, res) => {
+  var travelStopIdx = req.params.idx;
+  board.edit({travelStopIdx: travelStopIdx})
+    .then(function() {
+      res.send(returnCode['board']['addSuccess'])
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.status(500).send(returnCode['unknown']['error'])
+    })
 });
 
 //T스탑 글 삭제
-router.post('/:id/delete', (req, res) => {
-
+router.post('/:idx/delete', (req, res) => {
+  var travelStopIdx = req.params.idx;
+  board.delete({travelStopIdx: travelStopIdx})
+    .then(function() {
+      res.send(returnCode['board']['addSuccess'])
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.status(500).send(returnCode['unknown']['error'])
+    })
 });
 
 // T스탑 글 목록
-router.get('/:id/list', (req, res) => {
+router.get('/:idx/list', (req, res) => {
   board.selectAll({})
     .then((result) => {
       console.log(result);
@@ -44,10 +61,10 @@ router.get('/:id/list', (req, res) => {
         list.push(
           {
             "name": result[i]['username'],
-            "content": result[i]['content'],
+            "memo": result[i]['memo'],
             "location":{
                 "longitude": code[i]['lng'],
-                "latitude": code[i]['lat'],
+                "latitude": code[i]['lat']
             }
           }
         );
