@@ -19,6 +19,10 @@ app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  console.log(req.method + " " + req.url)
+  next()
+});
 
 mongoose.Promise = global.Promise;
 

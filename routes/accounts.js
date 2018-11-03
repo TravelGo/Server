@@ -4,6 +4,14 @@ const Accounts = require('../models/accounts');
 const ValidCheck = require("../validCheck");
 const Util = require("../util");
 
+router.get('/', (req, res) => {
+    let token = "OAISJDOAJDOISAJDOIJDSAOIASDOIJASOIDj"
+    res.send({
+        isLogin : false,
+        token : token
+    })
+})
+
 router.post('/create', (req, res) => {
 
     var username = req.body.username.trim();
