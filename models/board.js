@@ -59,8 +59,8 @@ Board.statics.selectAll = function(param) {
   return this.find(param);
 };
 
-Board.statics.edit = function(param, payload) {
-  return this.findByIdAndUpdate(param, payload);
+Board.statics.edit = function(param, set) {
+  return this.findByIdAndUpdate(param, set);
 };
 
 Board.statics.delete = function(param) {
