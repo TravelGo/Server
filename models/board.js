@@ -8,51 +8,63 @@ const Board = new mongoose.Schema({
     ref: 'travelStop',
     required: true
   },
-  username : {
+  count : {
+    type: Number,
+    required: true
+  },
+  like : {
+    type: Number,
+    required: true
+  }
+  writer : {
     type: String,
     required: true,
     unique: true
   },
   lat : {
       type: Number,
-      required: true,
+      required: true
   },
   lng : {
       type: Number,
       require: true
   },
-  description : {
+  memo : {
     type: String,
-    require: true,
+    require: true
+  },
+  tier : {
+    type: String,
+    require: true
   }
 }, {
     timestamps: true
 });
 
-Board.statics.create = function(travelStopIdx, username, lat, lng, memo) {
-    return (new this({
-      travelStopIdx: travelStopIdx,
-      username: username,
-      memo: memo,
-      lat: lat,
-      lng: lng
-    })).save()
+Board.statics.create = function(travelStopIdx, writer, lat, lng, memo) {
+  return (new this({
+    travelStopIdx: travelStopIdx,
+    writer: writer,
+    memo: memo,
+    lat: lat,
+    lng: lng
+  })).save()
 };
 
 Board.statics.select = function(param) {
-    return this.findOne(param);
+  return this.findById(param);
 };
 
 Board.statics.selectAll = function(param) {
   return this.find(param);
 };
 
-Board.statics.edit = function(param) {
-  return this.findOneAndUpdate(param);
+Board.statics.edit = function(param, payload) {
+  return this.findByIdAndUpdate(param, payload);
 };
 
 Board.statics.delete = function(param) {
-  return this.findOneAndDelete(param);
+  return this.findByIdAndDelete(param);
 };
 
 module.exports = mongoose.model('board', Board);

@@ -9,45 +9,42 @@ const Util = require("../util");
 // T스탑에 방명록 쓰기
 router.post('/:idx/write', (req, res) => {
   var travelStopIdx = req.params.idx;
-  var username = req.body.username;
+  var writer = req.body.writer;
   var lat = parseFloat(req.body.lat);
   var lng = parseFloat(req.body.lng);
   var memo = req.body.memo;
-  var image = req.body.image;
 
-  board.create(username, lat, lng, article)
+  board.create(travelStopIdx, writer, lat, lng, memo)
     .then(function() {
-        res.send(returnCode['board']['addSuccess']);
+        res.send(returnCode['board']['writeSuccess']);
     })
     .catch(function(err) {
         console.log(err);
-        res.status(500).send(returnCode['unknown']['error'])
+        res.status(500).send(returnCode['board']['writeFail'])
     })
 });
 
 //작성한 방명록 수정
-router.post('/:idx/edit', (req, res) => {
-  var travelStopIdx = req.params.idx;
-  board.edit({travelStopIdx: travelStopIdx})
+router.post('/:idx/:memo_id/edit', (req, res) => {
+  board.edit({_id: req.params.memo_id}, {$set: req.body})
     .then(function() {
-      res.send(returnCode['board']['addSuccess'])
+      res.send(returnCode['board']['writeSuccess']);
     })
     .catch(function(err) {
       console.log(err);
-      res.status(500).send(returnCode['unknown']['error'])
+      res.status(500).send(returnCode['board']['writeFail']);
     })
 });
 
 //T스탑 글 삭제
-router.post('/:idx/delete', (req, res) => {
-  var travelStopIdx = req.params.idx;
-  board.delete({travelStopIdx: travelStopIdx})
+router.post('/:idx/:memo_id/delete', (req, res) => {
+  board.delete({_id: req.params.memo_id})
     .then(function() {
-      res.send(returnCode['board']['addSuccess'])
+      res.send('Deleted Successfully.');
     })
     .catch(function(err) {
       console.log(err);
-      res.status(500).send(returnCode['unknown']['error'])
+      res.status(500).send(returnCode['unknown']['error']);
     })
 });
 
@@ -63,8 +60,8 @@ router.get('/:idx/list', (req, res) => {
             "name": result[i]['username'],
             "memo": result[i]['memo'],
             "location":{
-                "longitude": code[i]['lng'],
-                "latitude": code[i]['lat']
+                "latitude": result[i]['lat'],
+                "longitude": result[i]['lng']
             }
           }
         );
