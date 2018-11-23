@@ -5,7 +5,7 @@ const ValidCheck = require("../validCheck");
 const Util = require("../util");
 
 
-router.post('/create', (req, res) => {
+router.post('/upload', (req, res) => {
 
     // if(req.session.username !== "admin") {
     //   res.send(returnCode.notAdmin)
@@ -13,43 +13,53 @@ router.post('/create', (req, res) => {
     // }
 
     var lat = parseFloat(req.body.lat);
-    var lng = parseFloat(req.body.lng);
-    var title = req.body.title;
+    var lon = parseFloat(req.body.lon);
+    var name = req.body.name;
     var description = req.body.description;
     var image = req.body.image;
 
-    travelStop.create(title, description, lat, lng, image)
+    travelStop.create(lat, lon, name, description, image)
     .then(function() {
         res.send(returnCode['travelstop']['addSuccess']);
     })
     .catch(function(err) {
         console.log(err);
-        res.status(500).send(returnCode['unknown']['error'])
-    })
+        res.status(500).send(returnCode['travelstop']['addFail'])
+    });
 
 });
 
-router.get('/:lat/:lng', (req, res) => {
-    var lat = req.params.lat;
-    var lng = req.params.lng;
-
+router.get('/list', (req, res) => {
     travelStop.selectAll({})
-    .then((code) => {
-        console.log(code)
-        var output = []
-        for(i=0;i<code.length;i++) {
-            output.push(
+    .then(result => {
+        console.log(result)
+        var list = [];
+        for(i = 0; i < code.length; i++) {
+            list.push(
                 {
-                    "name": code[i]['title'],
+                    "name": result[i]['name'],
                     "location":{
-                        "longitude": code[i]['lng'],
-                        "latitude": code[i]['lat'],
+                        "latitude": result[i]['lat'],
+                        "longitude": result[i]['lon'],
                     },
+                    "image": result[i]['image'],
+                    "description": result[i]['description'],
+
                 }
             )
         }
-        res.send(output)
+        res.json(list);
     })
+    .catch(err => res.status(500).send(err));
+});
+
+router.get('/:key', (req, res) => {
+  var key = req.params.key;
+  travelstop.findOne({_id: key})
+  .then((code) => {
+    res.json(code);
+  })
+  .catch(err => res.status(500).send(err));
 });
 
 

@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
+const board = require('../models/board');
 
 const TravelStop = new mongoose.Schema({
   lat : {
       type: Number,
       required: true,
   },
-  lng : {
+  lon : {
       type: Number,
       require: true
   },
-  title : {
+  name : {
     type: String,
     require: true,
   },
@@ -20,12 +21,16 @@ const TravelStop = new mongoose.Schema({
   image : {
     type: String,
     require: true
+  },
+  count : {
+    type: Number,
+    require: true
   }
 }, {
     timestamps: true
 });
 
-TravelStop.statics.create = function(title, description, lat, lng, image) {
+TravelStop.statics.create = function(lat, lon, name, description, image) {
     return (new this({
       title: title,
       description: description,
