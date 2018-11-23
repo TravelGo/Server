@@ -40,7 +40,7 @@ router.get('/:lat/:lng', (req, res) => {
         for(i=0;i<code.length;i++) {
             output.push(
                 {
-		    "idx" : code[i]['idx'], 
+		    "_id" : code[i]['_id'], 
                     "name": code[i]['title'],
                     "location":{
                         "longitude": code[i]['lng'],
