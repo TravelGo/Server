@@ -17,9 +17,40 @@ router.get('/visit/:userID/:id', (req, res) => {
     var id = req.params.id;
 
     var userID = req.params.userID;
+    visitied.findOne({
+        user : userID,
+        travelstop : id
+    }).sort({date:-1}).then((r) => {
+        if(!r) {
+            visitied.create({
+                user : userID,
+                travelstop : travelstop,
+                date : Date.now()
+            })
+            res.send({
+                status : true,
+                message : ""
+            })
+            return;  
+        }
+        if(r.date > Date.now() - 3600 * 24 * 1000) {
+            res.send({
+                status : false,
+                message : "24시간에 한번씩만 누를 수 있습니다."
+            })
+            return;
+        }
+        visitied.create({
+            user : userID,
+            travelstop : travelstop,
+            date : Date.now()
+        })
+        res.send({
+            status : true,
+            message : ""
+        })
+    })
 
-    console.log(userID);
-    res.send("JTJ")
 });
 
 
