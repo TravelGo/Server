@@ -18,8 +18,9 @@ router.get('/visited/:userID', async (req, res) => {
     var userID = req.params.userID;
     var rows = await visitied.find({ user : userID }).sort({date:-1}).exec()
     var outputs = [];
-    rows.forEach(row => {
-        outputs.push(await travelStop.findById(row['travelstop']).exec())
+    rows.forEach(async (row) => {
+        var r = await travelStop.findById(row['travelstop']).exec()
+        outputs.push(r)
     })
     res.send(outputs);
 });
