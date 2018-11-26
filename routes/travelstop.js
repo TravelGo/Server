@@ -18,11 +18,11 @@ router.get('/visited/:userID', async (req, res) => {
     var userID = req.params.userID;
     var rows = await visitied.find({ user : userID }).sort({date:-1}).exec()
     var outputs = [];
-    console.log(rows);
-    rows.forEach(async (row) => {
-        var r = await travelStop.findById(row['travelstop']).exec()
+    for(let i=0;i<rows.length;i++) {
+        var r = await travelStop.findById(rows[i]['travelstop']).exec()
+        console.log(r);
         outputs.push(r)
-    })
+    }
     res.send(outputs);
 });
 
