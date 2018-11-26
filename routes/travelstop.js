@@ -1,6 +1,7 @@
 const returnCode = require('../returnCode');
 const router = require('express').Router();
 const travelStop = require('../models/travelStop');
+const visitied = require('../models/visitied');
 const ValidCheck = require("../validCheck");
 const Util = require("../util");
 
@@ -58,6 +59,12 @@ router.get('/:id', (req, res) => {
 	travelStop.findById(id).then(stop => {
         res.send(stop)
     })
+});
+
+router.get('/visit/:id', (req, res) => {
+    var id = req.params.id;
+    console.log(req.session.username);
+    res.send("JTJ")
 });
 
 module.exports = router;
