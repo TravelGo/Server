@@ -70,11 +70,18 @@ router.post('/login', function(req, res) {
         password: password
     }).then(function(account) {
         if(account === null) {
-            res.send(returnCode['accounts']['loginFail'])
+            res.send({
+                "status" : false,
+                "message" : returnCode['accounts']['loginFail']
+            })
             return;
         }
         req.session.username = username;
-        res.send(returnCode['accounts']['loginSuccess'])
+        res.send({
+            "status" : true,
+            "message" : username,
+            "_id" : account._id
+        })
         console.log(req.session.username)
     }).catch(function(err) {
         console.log(err);
