@@ -5,7 +5,7 @@ const ValidCheck = require("../validCheck");
 const Util = require("../util");
 
 
-router.post('/create', (req, res) => {
+router.post('/upload', (req, res) => {
 
     // if(req.session.username !== "admin") {
     //   res.send(returnCode.notAdmin)
