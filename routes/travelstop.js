@@ -53,6 +53,9 @@ router.get('/:lat/:lng', (req, res) => {
     })
 });
 
-
+router.get('/:id', (req, res) => {
+	var id = req.params.id;
+	travelStop.find	
+});
 
 module.exports = router;
