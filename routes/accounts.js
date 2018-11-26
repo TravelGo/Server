@@ -75,6 +75,7 @@ router.post('/login', function(req, res) {
         }
         req.session.username = username;
         res.send(returnCode['accounts']['loginSuccess'])
+        console.log(req.session.username)
     }).catch(function(err) {
         console.log(err);
         res.status(500).send(returnCode['unknown']['error']);
