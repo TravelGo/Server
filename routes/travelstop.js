@@ -29,7 +29,7 @@ router.get('/visit/:userID/:id', (req, res) => {
             })
             res.send({
                 status : true,
-                message : ""
+                message : "방문을 환영합니다."
             })
             return;  
         }
@@ -47,10 +47,9 @@ router.get('/visit/:userID/:id', (req, res) => {
         })
         res.send({
             status : true,
-            message : ""
+            message : "방문을 환영합니다."
         })
     })
-
 });
 
 
