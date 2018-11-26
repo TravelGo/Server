@@ -5,6 +5,19 @@ const visitied = require('../models/visitied');
 const ValidCheck = require("../validCheck");
 const Util = require("../util");
 
+router.get('/:id', (req, res) => {
+	var id = req.params.id;
+	travelStop.findById(id).then(stop => {
+        res.send(stop)
+    })
+});
+
+router.get('/visit/:id', (req, res) => {
+    var id = req.params.id;
+    console.log(req.session.username);
+    res.send("JTJ")
+});
+
 
 router.post('/upload', (req, res) => {
 
@@ -54,17 +67,5 @@ router.get('/:lat/:lng', (req, res) => {
     })
 });
 
-router.get('/:id', (req, res) => {
-	var id = req.params.id;
-	travelStop.findById(id).then(stop => {
-        res.send(stop)
-    })
-});
-
-router.get('/visit/:id', (req, res) => {
-    var id = req.params.id;
-    console.log(req.session.username);
-    res.send("JTJ")
-});
 
 module.exports = router;
