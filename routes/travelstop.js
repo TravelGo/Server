@@ -5,6 +5,26 @@ const visitied = require('../models/visitied');
 const ValidCheck = require("../validCheck");
 const Util = require("../util");
 
+
+router.get('/recommanded', (req, res) => {
+    travelStop.selectAll({})
+    .then((code) => {
+        console.log(code)
+        var output = []
+        for(i=0;i<code.length;i++) {
+            output.push(
+                {
+                    "_id": code[i]['_id'],
+                    "name": code[i]['title'],
+                    "image": code[i]['image'],
+                }
+            )
+        }
+        res.send(output)
+    })
+});
+
+
 router.get('/:id', (req, res) => {
 	var id = req.params.id;
 	travelStop.findById(id).then(stop => {
@@ -115,25 +135,5 @@ router.get('/:lat/:lng', (req, res) => {
         res.send(output)
     })
 });
-
-
-router.get('/recommanded', (req, res) => {
-    travelStop.selectAll({})
-    .then((code) => {
-        console.log(code)
-        var output = []
-        for(i=0;i<code.length;i++) {
-            output.push(
-                {
-                    "_id": code[i]['_id'],
-                    "name": code[i]['title'],
-                    "image": code[i]['image'],
-                }
-            )
-        }
-        res.send(output)
-    })
-});
-
 
 module.exports = router;
