@@ -14,13 +14,14 @@ router.get('/:id', (req, res) => {
 
 
 
-router.get('/visited/:userID', (req, res) => {
+router.get('/visited/:userID', async (req, res) => {
     var userID = req.params.userID;
-    visitied.find({
-        user : userID
-    }).sort({date:-1}).then((r) => {
-        res.send(r);
+    var rows = await visitied.find({ user : userID }).sort({date:-1}).exec()
+    var outputs = [];
+    rows.forEach(row => {
+        outputs.push(await travelStop.findById(row['travelstop']).exec())
     })
+    res.send(outputs);
 });
 
 
