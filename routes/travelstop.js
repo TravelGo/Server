@@ -12,9 +12,13 @@ router.get('/:id', (req, res) => {
     })
 });
 
-router.get('/visit/:id', (req, res) => {
+router.get('/visit/:userID/:id', (req, res) => {
+    var userID = req.params.userID;
     var id = req.params.id;
-    console.log(req.session.username);
+
+    var userID = req.params.userID;
+
+    console.log(userID);
     res.send("JTJ")
 });
 
