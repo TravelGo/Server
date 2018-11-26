@@ -55,7 +55,9 @@ router.get('/:lat/:lng', (req, res) => {
 
 router.get('/:id', (req, res) => {
 	var id = req.params.id;
-	travelStop.find	
+	travelStop.findById(id).then(stop => {
+        res.send(stop)
+    })
 });
 
 module.exports = router;
