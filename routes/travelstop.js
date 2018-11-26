@@ -12,6 +12,19 @@ router.get('/:id', (req, res) => {
     })
 });
 
+
+
+router.get('/visited/:userID', (req, res) => {
+    var userID = req.params.userID;
+
+    visitied.findOne({
+        user : userID
+    }).sort({date:-1}).then((r) => {
+        res.send(r);
+    })
+});
+
+
 router.get('/visit/:userID/:id', (req, res) => {
     var userID = req.params.userID;
     var id = req.params.id;
