@@ -24,7 +24,7 @@ router.get('/visit/:userID/:id', (req, res) => {
         if(!r) {
             visitied.create({
                 user : userID,
-                travelstop : travelstop,
+                travelstop : id,
                 date : Date.now()
             })
             res.send({
