@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
         const account = await Accounts.findById(rows[i].user).exec()
         output.push({
             'userID' : rows[i].user,
-            'user' : account[fullname],
+            'user' : account.fullname,
             'body' : rows[i].body,
             'date' : rows[i].date,
         })
