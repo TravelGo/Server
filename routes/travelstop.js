@@ -2,6 +2,7 @@ const returnCode = require('../returnCode');
 const router = require('express').Router();
 const travelStop = require('../models/travelStop');
 const visitied = require('../models/visitied');
+const Comments = require('../models/comments');
 const ValidCheck = require("../validCheck");
 const Util = require("../util");
 
