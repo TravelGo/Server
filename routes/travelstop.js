@@ -31,10 +31,10 @@ router.get('/:id', async (req, res) => {
 	var id = req.params.id;
 	travelStop.findById(id).then(async stop => {
         const rows = await Comments.find({ travelStop : id, }).sort({date:-1}).limit(3).exec();
-        const output = []
+        const comments = []
         for(let i=0;i<rows.length;i++) {
             const account = await Accounts.findById(rows[i].user).exec()
-            output.push({
+            comments.push({
                 'userID' : rows[i].user,
                 'user' : account.fullname,
                 'body' : rows[i].body,
