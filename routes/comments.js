@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Comments = require('../models/comments');
+const Accounts = require('../models/accounts');
 const ValidCheck = require("../validCheck");
 const Util = require("../util");
 
@@ -21,21 +22,23 @@ router.put('/:id', (req, res) => {
     })
 })
 
-router.get('/:id', (req, res) => {
-    Comments.find({
-        travelStop : req.params.id,
-    })
-    .sort({date:-1})
-    .then(r => {
+router.get('/:id', async (req, res) => {
+    const rows = await Comments.find({ travelStop : req.params.id, }).sort({date:-1}).exec();
+    const output = []
+    for(let i=0;i<rows.length;i++) {
+        const account = await Accounts.findById(rows[i].user).exec()
+        console.log(account);
+        output.push({
+            'userID' : rows[i].user,
+            'user' : account.fullname,
+            'body' : rows[i].body,
+            'date' : rows[i].date,
+        })
         res.send({
             status : true,
             data : r
         })
-    }).catch(() => {
-        res.send({
-            status : false
-        })
-    })
+    }
 })
 
 module.exports = router;
