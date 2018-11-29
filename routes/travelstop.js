@@ -28,7 +28,7 @@ router.get('/recommanded', (req, res) => {
 
 router.get('/:id', async (req, res) => {
 	var id = req.params.id;
-	travelStop.findById(id).then(stop => {
+	travelStop.findById(id).then(async stop => {
         res.send({
             _id	: stop._id,
             title : stop.title,
