@@ -27,18 +27,17 @@ router.get('/:id', async (req, res) => {
     const output = []
     for(let i=0;i<rows.length;i++) {
         const account = await Accounts.findById(rows[i].user).exec()
-        console.log(account);
         output.push({
             'userID' : rows[i].user,
-            'user' : account.fullname,
+            'user' : account[fullname],
             'body' : rows[i].body,
             'date' : rows[i].date,
         })
-        res.send({
-            status : true,
-            data : r
-        })
     }
+    res.send({
+        status : true,
+        data : output
+    })
 })
 
 module.exports = router;
