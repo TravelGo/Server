@@ -29,6 +29,17 @@ router.get('/recommanded', (req, res) => {
 router.get('/:id', async (req, res) => {
 	var id = req.params.id;
 	travelStop.findById(id).then(async stop => {
+        const rows = await Comments.find({ travelStop : id, }).sort({date:-1}).limit(3).exec();
+        const output = []
+        for(let i=0;i<rows.length;i++) {
+            const account = await Accounts.findById(rows[i].user).exec()
+            output.push({
+                'userID' : rows[i].user,
+                'user' : account.fullname,
+                'body' : rows[i].body,
+                'date' : rows[i].date,
+            })
+        }    
         res.send({
             _id	: stop._id,
             title : stop.title,
@@ -36,7 +47,7 @@ router.get('/:id', async (req, res) => {
             lat	: stop.lat,
             lng	: stop.lng,
             image : stop.image,
-            comments : await Comments.find({ travelStop : req.params.id, }).sort({date:-1}).limit(3).exec()
+            comments : comments
         })
     })
 });
