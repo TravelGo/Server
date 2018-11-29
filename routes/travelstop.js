@@ -25,10 +25,18 @@ router.get('/recommanded', (req, res) => {
 });
 
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
 	var id = req.params.id;
 	travelStop.findById(id).then(stop => {
-        res.send(stop)
+        res.send({
+            _id	: stop._id,
+            title : stop.title,
+            description	: stop.description,
+            lat	: stop.lat,
+            lng	: stop.lng,
+            image : stop.image,
+            comments : await Comments.find({ travelStop : req.params.id, }).sort({date:-1}).limit(3).exec()
+        })
     })
 });
 
@@ -96,8 +104,8 @@ router.post('/upload', (req, res) => {
     // }
 
     var lat = parseFloat(req.body.lat);
-    var lng = parseFloat(req.body.lng);
     var title = req.body.title;
+    var lng = parseFloat(req.body.lng);
     var description = req.body.description;
     var image = req.body.image;
 
