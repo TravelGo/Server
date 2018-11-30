@@ -138,7 +138,7 @@ router.get('/:lat/:lng', (req, res) => {
     var lat = parseFloat(req.params.lat);
     var lng = parseFloat(req.params.lng);
 
-    travelStop.find({lng:{$lt:lng - 0.001,$gt:lng + 0.001},lat:{$lt:lat - 0.001, $gt:lat + 0.001}})
+    travelStop.find({lng:{$lt:lng - 0.006,$gt:lng + 0.006},lat:{$lt:lat - 0.006, $gt:lat + 0.006}})
     .then((code) => {
         var output = []
         for(i=0;i<code.length;i++) {
