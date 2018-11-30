@@ -38,6 +38,8 @@ router.get('/all', (req, res) => {
                     "_id": code[i]['_id'],
                     "name": code[i]['title'],
                     "image": code[i]['image'],
+                    "lat" : code[i]['lat'],
+                    "lng" : code[i]['lng']
                 }
             )
         }
