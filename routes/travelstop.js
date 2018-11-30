@@ -142,16 +142,20 @@ router.get('/:lat/:lng', (req, res) => {
         console.log(code)
         var output = []
         for(i=0;i<code.length;i++) {
-            output.push(
-                {
-		    "_id" : code[i]['_id'], 
-                    "name": code[i]['title'],
-                    "location":{
-                        "longitude": code[i]['lng'],
-                        "latitude": code[i]['lat'],
-                    },
+            if(lng - 0.001 < code[i]['lng'] && code[i]['lng'] < lng + 0.001) {
+                if(lat - 0.001 < code[i]['lat'] && code[i]['lat'] < lat + 0.001) {
+                    output.push(
+                        {
+                            "_id": code[i]['_id'],
+                            "name": code[i]['title'],
+                            "location": {
+                                "longitude": code[i]['lng'],
+                                "latitude": code[i]['lat'],
+                            },
+                        }
+                    )
                 }
-            )
+            }
         }
         res.send(output)
     })
