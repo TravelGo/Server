@@ -7,7 +7,7 @@ if __name__ == "__main__" :
     f.close()
     
     for stop in stops['stops'] :
-        if not stops.get('image', '') :
+        if not stop.get('image', '') :
             stop['image'] = "https://pds.joins.com/news/component/htmlphoto_mmdata/201408/08/htm_20140808162735l300l303.jpg"
         res = requests.post("http://localhost/travelstop/upload",
         data=stop)
