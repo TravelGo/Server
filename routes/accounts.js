@@ -96,7 +96,10 @@ router.get("/logout", function(req, res) {
 
 router.get("/:idx", function(req, res) {
     Accounts.findById(req.params.idx).then(r => {
-        res.send(r);
+        res.send({
+            "username" : r.username,
+            "fullname" : r.fullname
+        });
     })
 });
 
