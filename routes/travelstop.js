@@ -9,21 +9,22 @@ const Util = require("../util");
 
 
 router.get('/recommanded', (req, res) => {
-    travelStop.selectAll({})
-    .then((code) => {
-        // console.log(code)
-        var output = []
-        for(i=0;i<code.length;i++) {
-            output.push(
-                {
-                    "_id": code[i]['_id'],
-                    "name": code[i]['title'],
-                    "image": code[i]['image'],
-                }
-            )
-        }
-        res.send(output)
-    })
+    res.send([])
+    // travelStop.selectAll({})
+    // .then((code) => {
+    //     // console.log(code)
+    //     var output = []
+    //     for(i=0;i<code.length;i++) {
+    //         output.push(
+    //             {
+    //                 "_id": code[i]['_id'],
+    //                 "name": code[i]['title'],
+    //                 "image": code[i]['image'],
+    //             }
+    //         )
+    //     }
+    //     res.send(output)
+    // })
 });
 
 
