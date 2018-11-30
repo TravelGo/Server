@@ -137,7 +137,7 @@ router.get('/:lat/:lng', (req, res) => {
     var lat = req.params.lat;
     var lng = req.params.lng;
 
-    travelStop.find({lng:{$lt:126.997917,$gt:126.995917},lat:{$lt:37.611304, $gt:37.609304}})
+    travelStop.find({lng:{$lt:lng - 0.001,$gt:lng + 0.001},lat:{$lt:lat - 0.001, $gt:lat + 0.001}})
     .then((code) => {
         var output = []
         for(i=0;i<code.length;i++) {
