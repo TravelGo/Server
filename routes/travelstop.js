@@ -27,6 +27,24 @@ router.get('/recommanded', (req, res) => {
     // })
 });
 
+router.get('/all', (req, res) => {
+    travelStop.selectAll({})
+    .then((code) => {
+        // console.log(code)
+        var output = []
+        for(i=0;i<code.length;i++) {
+            output.push(
+                {
+                    "_id": code[i]['_id'],
+                    "name": code[i]['title'],
+                    "image": code[i]['image'],
+                }
+            )
+        }
+        res.send(output)
+    })
+});
+
 
 router.get('/:id', async (req, res) => {
 	var id = req.params.id;
