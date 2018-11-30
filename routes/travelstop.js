@@ -134,8 +134,8 @@ router.post('/upload', (req, res) => {
 });
 
 router.get('/:lat/:lng', (req, res) => {
-    var lat = req.params.lat;
-    var lng = req.params.lng;
+    var lat = parseFloat(req.params.lat);
+    var lng = parseFloat(req.params.lng);
 
     travelStop.find({lng:{$lt:lng - 0.001,$gt:lng + 0.001},lat:{$lt:lat - 0.001, $gt:lat + 0.001}})
     .then((code) => {
