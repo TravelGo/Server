@@ -164,6 +164,7 @@ router.get('/:lat/:lng', (req, res) => {
                 {
                     "_id": code[i]['_id'],
                     "name": code[i]['title'],
+                    "image": code[i]['image'],
                     "location": {
                         "longitude": code[i]['lng'],
                         "latitude": code[i]['lat'],
