@@ -94,4 +94,10 @@ router.get("/logout", function(req, res) {
     res.send(returnCode['accounts']['Logout'])
 });
 
+router.get("/:idx", function(req, res) {
+    Accounts.findById(req.params.idx).then(r => {
+        res.send(r);
+    })
+});
+
 module.exports = router;
