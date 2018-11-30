@@ -137,24 +137,20 @@ router.get('/:lat/:lng', (req, res) => {
     var lat = req.params.lat;
     var lng = req.params.lng;
 
-    travelStop.selectAll({})
+    travelStop.find({lng:{$lt:126.997917,$gt:126.995917},lat:{$lt:37.611304, $gt:37.609304}})
     .then((code) => {
         var output = []
         for(i=0;i<code.length;i++) {
-            if(lng - 0.001 < code[i]['lng'] && code[i]['lng'] < lng + 0.001) {
-                if(lat - 0.001 < code[i]['lat'] && code[i]['lat'] < lat + 0.001) {
-                    output.push(
-                        {
-                            "_id": code[i]['_id'],
-                            "name": code[i]['title'],
-                            "location": {
-                                "longitude": code[i]['lng'],
-                                "latitude": code[i]['lat'],
-                            },
-                        }
-                    )
+            output.push(
+                {
+                    "_id": code[i]['_id'],
+                    "name": code[i]['title'],
+                    "location": {
+                        "longitude": code[i]['lng'],
+                        "latitude": code[i]['lat'],
+                    },
                 }
-            }
+            )
         }
         res.send(output)
     })
