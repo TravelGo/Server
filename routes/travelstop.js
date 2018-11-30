@@ -11,7 +11,7 @@ const Util = require("../util");
 router.get('/recommanded', (req, res) => {
     travelStop.selectAll({})
     .then((code) => {
-        console.log(code)
+        // console.log(code)
         var output = []
         for(i=0;i<code.length;i++) {
             output.push(
@@ -61,7 +61,7 @@ router.get('/visited/:userID', async (req, res) => {
     var outputs = [];
     for(let i=0;i<rows.length;i++) {
         var r = await travelStop.findById(rows[i]['travelstop']).exec()
-        console.log(r);
+        // console.log(r);
         outputs.push(r)
     }
     res.send(outputs);
@@ -139,7 +139,6 @@ router.get('/:lat/:lng', (req, res) => {
 
     travelStop.selectAll({})
     .then((code) => {
-        console.log(code)
         var output = []
         for(i=0;i<code.length;i++) {
             output.push(
