@@ -176,7 +176,7 @@ router.get('/:lat/:lng', (req, res) => {
                     "location": {
                         "longitude": code[i]['lng'],
                         "latitude": code[i]['lat'],
-                    },,
+                    },
                     "address" : code[i]['address']
                 }
             )
