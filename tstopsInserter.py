@@ -9,6 +9,6 @@ if __name__ == "__main__" :
     for stop in stops['stops'] :
         if not stop.get('image', '') :
             stop['image'] = "https://pds.joins.com/news/component/htmlphoto_mmdata/201408/08/htm_20140808162735l300l303.jpg"
-        res = requests.post("http://localhost/travelstop/upload",
+        res = requests.post("http://localhost:8080/travelstop/upload",
         data=stop)
         print(res.text)

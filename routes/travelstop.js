@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 const returnCode = require('../returnCode');
 const router = require('express').Router();
 const travelStop = require('../models/travelStop');
@@ -39,7 +40,8 @@ router.get('/all', (req, res) => {
                     "name": code[i]['title'],
                     "image": code[i]['image'],
                     "lat" : code[i]['lat'],
-                    "lng" : code[i]['lng']
+                    "lng" : code[i]['lng'],
+                    "address" : code[i]['address']
                 }
             )
         }
@@ -142,15 +144,19 @@ router.post('/upload', (req, res) => {
     var lng = parseFloat(req.body.lng);
     var description = req.body.description;
     var image = req.body.image;
-
-    travelStop.create(title, description, lat, lng, image)
-    .then(function() {
-        res.send(returnCode['travelstop']['addSuccess']);
-    })
-    .catch(function(err) {
-        console.log(err);
-        res.status(500).send(returnCode['unknown']['error'])
-    })
+    
+    fetch("https://maps.google.com/maps/api/geocode/json?language=ko&latlng=" + lat + "," + lng + "&key=AIzaSyC-wh2GZ92W7jsNjtHD1JUDoMl1nNLRJgo")
+    .then(res => res.json())
+    .then(json => {
+        travelStop.create(title, description, lat, lng, image, json.results[0].formatted_address)
+        .then(function() {
+            res.send(returnCode['travelstop']['addSuccess']);
+        })
+        .catch(function(err) {
+            console.log(err);
+            res.status(500).send(returnCode['unknown']['error'])
+        })    
+    });
 
 });
 
@@ -170,7 +176,8 @@ router.get('/:lat/:lng', (req, res) => {
                     "location": {
                         "longitude": code[i]['lng'],
                         "latitude": code[i]['lat'],
-                    },
+                    },,
+                    "address" : code[i]['address']
                 }
             )
         }

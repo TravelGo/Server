@@ -1,6 +1,27 @@
 {
     "stops":[
       {
+        "title": "개발자 뚜벅초의 집",
+        "lng": "127.004746",
+        "lat": "37.610414",
+        "image": "https://pbs.twimg.com/profile_images/713333853809614849/1UvIyi4n_400x400.jpg",
+        "description": "뚜벅초가 자주 발견되는 트래블 스탑이다. 이 주변을 돌아다니다가 뚜벅초를 잡을 수도?"
+      },
+      {
+        "title": "개발자 냄새꼬의 집",
+        "lng": "127.005094",
+        "lat": "37.611196",
+        "image": "http://static.pokemonpets.com/images/monsters-images-300-300/44-Gloom.png",
+        "description": "냄새꼬가 자주 발견되는 트래블 스탑이다. 이 주변을 돌아다니다가 냄새꼬를 잡을 수도?"
+      },
+      {
+        "title": "개발자 라플레시아의 집",
+        "lng": "127.005292",
+        "lat": "37.610350",
+        "image": "http://fetch.rigvedawiki.net/f/_cache/fetchfile/7/79/795124640d7ab5d081ddc6825f5a6a71.png",
+        "description": "라플레시아가 자주 발견되는 트래블 스탑이다. 이 주변을 돌아다니다가 라플레시아를 잡을 수도?"
+      },
+      {
         "title": "kookmin University",
         "lng": "126.996917",
         "lat": "37.611026",
